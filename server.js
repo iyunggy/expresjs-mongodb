@@ -2,13 +2,11 @@ const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const jobRouter = require('./routers/jobRouter')
 
 dotenv.config();
-
 const app = express();
 
-let jobs = [{ company: "educourse" }, { company: "maleo" }];
+const jobRouter = require('./routers/jobRouter')
 
 app.use(express.json());
 
