@@ -38,4 +38,13 @@ const deleteJob = async (req, res) => {
   res.status(200).json({ msg: "job delete" });
 };
 
-module.exports = { createJob, getAllJobs, getJob, deleteJob };
+const updateJob = async (req, res) => {
+  const { id } = req.params;
+  const updateJob = await Job.findByIdAndUpdate(id, req.body, { new: true });
+  if (!updateJob) {
+    return res.status(404).json({ msg: `no job with id ${id}` });
+  }
+  res.status(200).json({ msg: "job modified", job: updateJob });
+};
+
+module.exports = { createJob, getAllJobs, getJob, deleteJob , updateJob};
