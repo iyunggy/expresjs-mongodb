@@ -6,6 +6,7 @@ const getAllJobs = async (req, res) => {
   res.status(200).json({ jobs });
 };
 
+// get detail
 const getJob = async (req, res) => {
   const { id } = req.params;
   const job = await Job.findById(id);
@@ -23,8 +24,18 @@ const createJob = async (req, res) => {
     res.status(201).json({ job });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ msg: "server error" });
+    return res.status(500).json({ msg: "server error" });
   }
 };
 
-module.exports = { createJob, getAllJobs, getJob };
+// delete job
+const deleteJob = async (req, res) => {
+  const { id } = req.params;
+  const removeJob = Job.findByIdAndDelete(id);
+  if (!removeJob) {
+    return res.status(400).json({ msg: `no job with id ${id}` });
+  }
+  res.status(200).json({ msg: "job delete" });
+};
+
+module.exports = { createJob, getAllJobs, getJob, deleteJob };
