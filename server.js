@@ -31,13 +31,6 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5100;
 
-// app.listen(port, (error) => {
-//   console.log(process.env.MONGO_URL)
-//   const mongo = mongoose.connect(process.env.MONGO_URL);
-//   console.log(mongo)
-//   console.log(`server running on PORT ${port}`);
-// });
-
 try {
   mongoose.connect(process.env.MONGO_URL);
   app.listen(port, () => {
